@@ -9,13 +9,16 @@
     <script src="../../src/components/nav/js/nav.js" defer></script>
     <script src="../../src/components/preloader/js/preloader.js" defer></script>
     <script src="../../public/jsMain/jsMain.js" defer></script>
+    <script src="../../src/components/poupUp/js/poupUp.js"></script>
 
-    <script src="../../src/components/menuTreinos/js/menuTreinos.js"  defer></script>
+    <script src="../../src/components/menuTreinos/js/menuTreinos.js" defer></script>
     <link rel="stylesheet" href="../../src/components/menuTreinos/style/menuTreinos.css">
 
     <!--estilo local-->
     <link rel="stylesheet" href="style/treinosAdd.css">
     <script defer src="../../src/connectionAPI/treinosAdd/treinosAddAPI.js"></script>
+
+
     <script defer src="js/treinosAdd.js"></script>
 </head>
 
@@ -28,13 +31,69 @@
 
             <div id="nomeDescricao">
                 <input type="text" id="InputNomeTreino" placeholder="Nome do Treino">
-                <textarea  id="TextareaDescricaoTreino" placeholder="Descrição"></textarea>
+                <textarea id="TextareaDescricaoTreino" placeholder="Descrição"></textarea>
             </div>
 
-<div id="diaDivisoes">
-    <div class="containersDivisoes">Dia 1</div>
-    <div class="containersDivisoes" id="addDivisoes">+</div>
-</div>
+            <div id="diaDivisoes">
+                <!-- <div class="containersDivisoes">Dia 1</div> -->
+                <div  id="addDivisoes" class="containersDivisoes">+</div>
+            </div>
+            <div id="exercicioTreino">
+                <div id="buscarExercicio">
+                    <input type="text" id="inputBuscarExercicio" placeholder="Pesquise o exercicio">
+                    <div id="resultadosExercicios">
+                        <div class="exercicio">
+                            <img src="../../public/assets/images/halteresLogin.gif" alt="">
+                            <div class="nome-exercicio">Supino Inclinado</div>
+                            <div class="serie-exercicio">3</div>
+                            <div>X</div>
+                            <div class="rep-exercicio">12</div>
+                            <div class="addExercicio">Add</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="diasCorrespondentes">
+                     <div class="dia" data-set="conteudo-dia1">
+                        <div class="nome_dia">Dia 1</div>
+                        <div class="exercicio">
+                            <img src="../../public/assets/images/halteresLogin.gif" alt="">
+                            <div class="nome-exercicio">Supino Inclinado</div>
+                            <div class="serie-exercicio">3</div>
+                            <div>X</div>
+                            <div class="rep-exercicio">12</div>
+                        </div>
+                        <div class="exercicio">
+                            <img src="../../public/assets/images/halteresLogin.gif" alt="">
+                            <div class="nome-exercicio">Supino Inclinado</div>
+                            <div class="serie-exercicio">3</div>
+                            <div>X</div>
+                            <div class="rep-exercicio">12</div>
+                        </div>
+                    </div> 
+
+                    <div class="dia" data-set="conteudo-dia2">
+                        <div class="nome_dia">Dia 2</div>
+                    </div> 
+                    <div class="dia" data-set="conteudo-dia3">
+                        <div class="nome_dia">Dia 3</div>
+                    </div> 
+                    <div class="dia" data-set="conteudo-dia4">
+                        <div class="nome_dia">Dia 4</div>
+                    </div> 
+                    <div class="dia" data-set="conteudo-dia5">
+                        <div class="nome_dia">Dia 5</div>
+                    </div> 
+                    <div class="dia" data-set="conteudo-dia6">
+                        <div class="nome_dia">Dia 6</div>
+                    </div> 
+                    <div class="dia" data-set="conteudo-dia7">
+                        <div class="nome_dia">Dia 7</div>
+                    </div> 
+
+                </div>
+            </div>
+
 
         </div>
     </section>

@@ -27,7 +27,7 @@ function initializeNav() {
     let TextMenus = document.querySelectorAll('.text-menu'); // Modificado para adicionar o ponto antes do nome da classe
     let nav = document.querySelector('nav');
     let containSecondary = document.querySelector('.contain-secondary');
-    let navContraida = document.querySelector('.nav-contraida');
+    let poupUp = document.querySelector('#poupUp');
     let navUlLis = document.querySelectorAll('nav ul li'); // Modificado para querySelectorAll
 
     // Verifica o tema salvo no localStorage ao carregar a página
@@ -98,6 +98,8 @@ function initializeNav() {
 
                 //jogando a nav para esquerda
                 nav.style.left = "-14%";
+                //aumentando poupUp
+                poupUp.style.width = "92%";
 
                 setTimeout(() => {
                     //Ocultar texto do menu
@@ -132,6 +134,8 @@ function initializeNav() {
                 produtosNotificationMenu.classList.remove('produtosNotificationMenuAlinhar');
                 //jogando a nav para esquerda
                 nav.style.left = "0%";
+                //diminuindo poupUp
+                poupUp.style.width = "78%";
                 //mudando a ordem dos icones e textos do menu
                 navUlLis.forEach(function (navUlLi) {
                     navUlLi.style.justifyContent = "start";
