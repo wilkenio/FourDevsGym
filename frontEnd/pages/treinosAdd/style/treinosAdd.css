@@ -135,7 +135,14 @@
     color: black; /* Cor normal do texto */
 }
 .containersDivisoes.selected {
-    color: red; /* Cor do texto quando selecionado */
+    background-color: var(--cor-1); /* Cor do texto quando selecionado */
+    color: var(--cor-3);
+    transition: 0.5s ease-in-out;
+}
+
+.containersDivisoes.noselected {
+    background-color: rgb(255, 255, 255); /* Cor do texto quando selecionado */
+    transition: 0.5s ease-in-out;
 }
 .expandable-content {
     display: none;

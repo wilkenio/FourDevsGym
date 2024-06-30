@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Adiciona evento de clique para adicionar novos dias
-    document.getElementById('addDivisoes').addEventListener('click', function() {
+    document.getElementById('addDivisoes').addEventListener('click', function () {
         // Verifica quantos dias já foram adicionados
-        var divCount = document.querySelectorAll('.containersDivisoes').length - 1;
+        var divCount = document.querySelectorAll('.containersDivisoes').length;
 
         // Se já adicionou até o dia 7, não faz nada
         if (divCount >= 7) {
@@ -20,6 +20,22 @@ document.addEventListener('DOMContentLoaded', function() {
         var diaDivisoes = document.getElementById('diaDivisoes');
         diaDivisoes.insertBefore(newDiv, this);
 
+        const containers = Array.from(document.querySelectorAll('.containersDivisoes'));
+        containers.forEach(container => {
+            container.addEventListener('click', (event) => {
+                event.stopImmediatePropagation();
+                // Obtém o valor do atributo 'data-menu-dia'
+                removeSelected();
+                event.target.classList.remove("noselected")
+                event.target.classList.add("selected")
+                const dia = container.getAttribute('data-menu-dia');
+                showDayContent(dia)
+                // Aqui você pode adicionar qualquer lógica adicional baseada no dia clicado
+            });
+        });
+        removeSelected();
+        newDiv.classList.remove('noselected');
+        newDiv.classList.add('selected');
         // Mostra apenas o conteúdo correspondente ao novo dia criado
         showDayContent(divCount + 1);
 
@@ -32,11 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Seleciona todos os elementos .containersDivisoes, exceto o botão de adicionar
     var containersDivisoes = document.querySelectorAll('.containersDivisoes:not(#addDivisoes)');
 
-    containersDivisoes.forEach(function(container, index) {
+    containersDivisoes.forEach(function (container, index) {
 
         // Adiciona evento de clique para cada div de dia correspondente
-        container.addEventListener('click', function() {
-          
+        container.addEventListener('click', function () {
+
             var menuDia = parseInt(this.dataset.menuDia);
             showDayContent(menuDia);
         });
@@ -57,18 +73,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function removeSelected() {
+    let divsDias = Array.from(document.querySelectorAll('.containersDivisoes'));
 
+    divsDias.forEach(element => {
+        element.classList.remove("selected");
+        element.classList.add("noselected")
+    });
+}
 
- // Seleciona todos os elementos com a classe 'containersDivisoes'
- const containers = document.querySelectorAll('.containersDivisoes');
-
- // Itera sobre cada elemento para adicionar um event listener de clique
- containers.forEach(container => {
-     container.addEventListener('click', () => {
-         // Obtém o valor do atributo 'data-menu-dia'
-         const dia = container.getAttribute('data-menu-dia');
-         console.log(`Clicou no dia ${dia}`);
-         
-         // Aqui você pode adicionar qualquer lógica adicional baseada no dia clicado
-     });
- });
+Array.from(document.getElementsByClassName("addExercicio"))
