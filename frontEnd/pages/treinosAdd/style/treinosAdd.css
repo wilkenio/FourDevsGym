@@ -141,3 +141,13 @@
     display: none;
     margin-top: 10px;
 }
+#resultadosExercicios{
+    overflow: overlay;
+    height: 25vh;
+}
+
+#resultadosExercicios input{
+    width: 10%;
+    padding: 2% 0 2% 0;
+    text-align: center;
+}
