@@ -1,85 +1,132 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Adiciona evento de clique para adicionar novos dias
-    document.getElementById('addDivisoes').addEventListener('click', function () {
-        // Verifica quantos dias já foram adicionados
-        var divCount = document.querySelectorAll('.containersDivisoes').length;
+    var diasAdicionados = []; // Array para armazenar os dias adicionados
 
-        // Se já adicionou até o dia 7, não faz nada
-        if (divCount >= 7) {
+    // Função para adicionar um novo dia
+    function addNewDay() {
+        // Verifica se já atingiu o limite máximo de 7 dias
+        if (diasAdicionados.length >= 7) {
             alert('Você atingiu o limite máximo de 7 dias.');
             return;
         }
 
-        // Cria o elemento div com o número do dia atual
-        var newDiv = document.createElement('div');
-        newDiv.classList.add('containersDivisoes');
-        newDiv.dataset.menuDia = divCount + 1;
-        newDiv.textContent = 'Dia ' + (divCount + 1); // Conteúdo do div com o número do dia
+        // Encontra o menor número de dia que ainda não foi adicionado
+        var newDia = findNextDay();
 
-        // Adiciona o novo div dentro de #diaDivisoes, antes de #addDivisoes
-        var diaDivisoes = document.getElementById('diaDivisoes');
-        diaDivisoes.insertBefore(newDiv, this);
+        // Cria o elemento div com o número do dia
+        var newDiv = createDayElement(newDia);
 
-        const containers = Array.from(document.querySelectorAll('.containersDivisoes'));
-        containers.forEach(container => {
-            container.addEventListener('click', (event) => {
-                event.stopImmediatePropagation();
-                // Obtém o valor do atributo 'data-menu-dia'
-                removeSelected();
-                event.target.classList.remove("noselected")
-                event.target.classList.add("selected")
-                const dia = container.getAttribute('data-menu-dia');
-                showDayContent(dia)
-                // Aqui você pode adicionar qualquer lógica adicional baseada no dia clicado
-            });
-        });
-        removeSelected();
-        newDiv.classList.remove('noselected');
-        newDiv.classList.add('selected');
-        // Mostra apenas o conteúdo correspondente ao novo dia criado
-        showDayContent(divCount + 1);
+        // Adiciona o novo div dentro de #diaDivisoes, mantendo a ordem correta
+        insertDayInOrder(newDiv);
+
+        // Adiciona o dia ao array de dias adicionados
+        diasAdicionados.push(newDia);
 
         // Remove o evento de clique para impedir múltiplas adições consecutivas após o sétimo dia
-        if (divCount + 1 >= 7) {
-            this.removeEventListener('click', arguments.callee);
+        if (diasAdicionados.length >= 7) {
+            document.getElementById('addDivisoes').removeEventListener('click', addNewDay);
+            document.getElementById('addDivisoes').style.display = "none";
         }
-    });
+    }
 
-    // Seleciona todos os elementos .containersDivisoes, exceto o botão de adicionar
-    var containersDivisoes = document.querySelectorAll('.containersDivisoes:not(#addDivisoes)');
+    // Função para criar um novo elemento de dia com o número fornecido
+    function createDayElement(dia) {
+        var newDiv = document.createElement('div');
+        newDiv.classList.add('containersDivisoes');
+        newDiv.dataset.menuDia = dia;
+        newDiv.textContent = 'Dia ' + dia; // Conteúdo do div com o número do dia
 
-    containersDivisoes.forEach(function (container, index) {
+        // Adiciona evento de clique para o novo div de dia
+        newDiv.addEventListener('click', function () {
+            removeSelected();
+            newDiv.classList.add("selected");
+            showDayContent(dia);
+        });
 
-        // Adiciona evento de clique para cada div de dia correspondente
-        container.addEventListener('click', function () {
+        return newDiv;
+    }
 
-            var menuDia = parseInt(this.dataset.menuDia);
-            showDayContent(menuDia);
+    // Função para inserir um novo dia na ordem correta no menu
+    function insertDayInOrder(newDiv) {
+        var diaDivisoes = document.getElementById('diaDivisoes');
+        var currentDivs = diaDivisoes.querySelectorAll('.containersDivisoes');
+
+        // Encontra o ponto de inserção correto
+        var insertIndex = 0;
+        while (insertIndex < currentDivs.length && parseInt(currentDivs[insertIndex].dataset.menuDia) < parseInt(newDiv.dataset.menuDia)) {
+            insertIndex++;
+        }
+
+        // Insere o novo div na posição correta
+        if (insertIndex < currentDivs.length) {
+            diaDivisoes.insertBefore(newDiv, currentDivs[insertIndex]);
+        } else {
+            diaDivisoes.appendChild(newDiv);
+        }
+    }
+
+    document.getElementById('addDivisoes').addEventListener('click', addNewDay);
+
+    var iconsTrash = document.querySelectorAll('.bi-trash-fill');
+    iconsTrash.forEach(function (icon) {
+        icon.addEventListener('click', function () {
+            var diaToRemove = this.parentNode.parentNode;
+            var Nmenu = diaToRemove.dataset.set;
+
+            // Retira os exercicio apos ser excluido
+            const elementosParaRemover = diaToRemove.querySelectorAll('.exercicio'); // Substitua 'suaClasse' pela classe específica
+            // Remover cada elemento encontrado
+            elementosParaRemover.forEach(elemento => {
+                elemento.remove();
+            });
+
+            let elementos = document.querySelectorAll('[data-menu-dia="' + Nmenu + '"]');
+
+            elementos.forEach(elemento => {
+                elemento.style.display = "none";
+                elemento.remove();
+                document.getElementById('addDivisoes').style.display = "flex";
+                // Remove o dia do array de dias adicionados
+                var indexToRemove = diasAdicionados.indexOf(parseInt(Nmenu));
+                if (indexToRemove !== -1) {
+                    diasAdicionados.splice(indexToRemove, 1);
+                }
+            });
+
+            diaToRemove.style.display = 'none';
+
+            if (diasAdicionados.length < 7) {
+                document.getElementById('addDivisoes').addEventListener('click', addNewDay);
+                document.getElementById('addDivisoes').style.display = "flex";
+            }
         });
     });
 
+    // Função para encontrar o próximo dia disponível para adição
+    function findNextDay() {
+        for (var i = 1; i <= 7; i++) {
+            if (!diasAdicionados.includes(i)) {
+                return i;
+            }
+        }
+        return 1; // Caso todos os dias tenham sido adicionados, retorna 1 como padrão
+    }
+
     function showDayContent(dayNumber) {
-        // Oculta todos os dias existentes
         var diasCorrespondentes = document.getElementById('diasCorrespondentes').querySelectorAll('.dia');
         for (var i = 0; i < diasCorrespondentes.length; i++) {
             diasCorrespondentes[i].style.display = 'none';
         }
 
-        // Exibe apenas o conteúdo do dia correspondente ao número informado
-        var diaToShow = document.querySelector('.dia[data-set="conteudo-dia' + dayNumber + '"]');
+        var diaToShow = document.querySelector('.dia[data-set="' + dayNumber + '"]');
         if (diaToShow) {
             diaToShow.style.display = 'block';
         }
     }
+
+    function removeSelected() {
+        let divsDias = Array.from(document.querySelectorAll('.containersDivisoes'));
+        divsDias.forEach(element => {
+            element.classList.remove("selected");
+        });
+    }
 });
-
-function removeSelected() {
-    let divsDias = Array.from(document.querySelectorAll('.containersDivisoes'));
-
-    divsDias.forEach(element => {
-        element.classList.remove("selected");
-        element.classList.add("noselected")
-    });
-}
-
-Array.from(document.getElementsByClassName("addExercicio"))

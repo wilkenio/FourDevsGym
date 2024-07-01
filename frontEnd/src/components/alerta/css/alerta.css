@@ -1,0 +1,17 @@
+#alerta{
+    padding: 1% 2% 1% 2%;
+    background-color: var(--cor-1);
+    border-radius: 5px;
+    color: var(--cor-3);
+    position: fixed;
+    z-index: 7;
+    right: -100%;
+    top: 1%;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    font-weight: 300;
+    transition: 0.5s;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+}

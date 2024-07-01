@@ -10,6 +10,7 @@
     <script src="../../src/components/preloader/js/preloader.js" defer></script>
     <script src="../../public/jsMain/jsMain.js" defer></script>
     <script src="../../src/components/poupUp/js/poupUp.js"></script>
+    <script src="../../src/components/alerta/js/alerta.js"></script>
 
     <script src="../../src/components/menuTreinos/js/menuTreinos.js" defer></script>
     <link rel="stylesheet" href="../../src/components/menuTreinos/style/menuTreinos.css">
@@ -27,16 +28,17 @@
 
     <section id="treinosView" class="contain-main">
         <div id="contain-dashboard" class="contain-secondary">
+            <h1  class="title-contain-main">Treinos - Add</h1>
             <div id="menu-treino"></div>
-
+           
             <div id="nomeDescricao">
-                <input type="text" id="InputNomeTreino" placeholder="Nome do Treino">
-                <textarea id="TextareaDescricaoTreino" placeholder="Descrição"></textarea>
+                <input type="text" id="InputNomeTreino" placeholder="Nome do Treino" required>
+                <textarea id="TextareaDescricaoTreino" placeholder="Descrição" required></textarea>
             </div>
 
             <div id="diaDivisoes">
                 <!-- <div class="containersDivisoes">Dia 1</div> -->
-                <div  id="addDivisoes">+</div>
+                <div id="addDivisoes">+ Dia</div>
             </div>
             <div id="exercicioTreino">
                 <div id="buscarExercicio">
@@ -50,11 +52,14 @@
                             <div class="rep-exercicio">12</div>
                             <div class="addExercicio">Add</div>
                         </div> -->
+                        <div id="preloaderExercicios">
+                            <img src="../../public/assets/images/logoFourDevsGym.png" alt="">
+                        </div>
                     </div>
                 </div>
 
                 <div id="diasCorrespondentes">
-                     <div class="dia" data-set="conteudo-dia1">
+                    <!-- <div class="dia" data-set="conteudo-dia1">
                         <div class="nome_dia">Dia 1</div>
                         <div class="exercicio">
                             <img src="../../public/assets/images/halteresLogin.gif" alt="">
@@ -69,32 +74,35 @@
                             <div class="serie-exercicio">3</div>
                             <div>X</div>
                             <div class="rep-exercicio">12</div>
-                        </div>
-                    </div> 
+                        </div> -->
+                    <div class="dia" data-set="1">
+                        <div class="nome_dia">Dia 1 <i class="bi bi-trash-fill"></i></div>
+                    </div>
 
-                    <div class="dia" data-set="conteudo-dia2">
-                        <div class="nome_dia">Dia 2</div>
-                    </div> 
-                    <div class="dia" data-set="conteudo-dia3">
-                        <div class="nome_dia">Dia 3</div>
-                    </div> 
-                    <div class="dia" data-set="conteudo-dia4">
-                        <div class="nome_dia">Dia 4</div>
-                    </div> 
-                    <div class="dia" data-set="conteudo-dia5">
-                        <div class="nome_dia">Dia 5</div>
-                    </div> 
-                    <div class="dia" data-set="conteudo-dia6">
-                        <div class="nome_dia">Dia 6</div>
-                    </div> 
-                    <div class="dia" data-set="conteudo-dia7">
-                        <div class="nome_dia">Dia 7</div>
-                    </div> 
-
+                    <div class="dia" data-set="2">
+                        <div class="nome_dia">Dia 2 <i class="bi bi-trash-fill"></i></div>
+                    </div>
+                    <div class="dia" data-set="3">
+                        <div class="nome_dia">Dia 3 <i class="bi bi-trash-fill"></i></div>
+                    </div>
+                    <div class="dia" data-set="4">
+                        <div class="nome_dia">Dia 4 <i class="bi bi-trash-fill"></i></div>
+                    </div>
+                    <div class="dia" data-set="5">
+                        <div class="nome_dia">Dia 5 <i class="bi bi-trash-fill"></i></div>
+                    </div>
+                    <div class="dia" data-set="6">
+                        <div class="nome_dia">Dia 6 <i class="bi bi-trash-fill"></i></div>
+                    </div>
+                    <div class="dia" data-set="7">
+                        <div class="nome_dia">Dia 7 <i class="bi bi-trash-fill"></i></div>
+                    </div>
+        
                 </div>
             </div>
-
-
+            <button id="enviarTreino">Adicionar<i class="bi bi-check"></i></button>
+        </div>
+       
         </div>
     </section>
 </body>
