@@ -39,7 +39,7 @@ estrutura fictícia
 Você pode acessar o FourDevs GymManager nos seguintes links:
 
 - **Painel Administrativo**:
-  [FourDevs GymManager - Painel Administrativo](https://fourdevs.com.br)
+  [FourDevs GymManager - Painel Administrativo](https://gym.fourdevs.com.br/)
 
 - **Baixar App**:
   [FourDevs GymManager - Baixar App](https://fourdevs.com.br)
@@ -55,7 +55,7 @@ Você pode acessar o FourDevs GymManager nos seguintes links:
 
 ## 📱 Figma
 Acesse nossos protótipos no Figma: <br>
-[Protótipo do Painel Adm](https://www.figma.com)<br>
+[Protótipo do Painel Adm](https://www.figma.com/proto/NSAejy0ekxBHwfaCw4Pd0w/FourDevGym?node-id=77-45&t=UPQGiXmuY0K4Poam-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1)<br>
 [Protótipo do App aluno](https://www.figma.com)
 
 ## 👏 Agradecimentos
